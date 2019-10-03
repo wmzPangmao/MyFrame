@@ -23,7 +23,7 @@ import androidx.annotation.NonNull;
 /**
  * 自定义Toast
  */
-public class XToast {
+public class MToast {
     private static final @ColorInt
     int DEFAULT_TEXT_COLOR = Color.parseColor("#FFFFFF");
 
@@ -44,7 +44,7 @@ public class XToast {
     /** Toast对象 */
     private static Toast mToast = null ;
 
-    private XToast() {
+    private MToast() {
     }
 
     public static Toast normal(@NonNull String message) {

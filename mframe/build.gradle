@@ -32,3 +32,22 @@ dependencies {
     androidTestImplementation 'androidx.test:runner:1.1.0-alpha3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0-alpha3'
 }
+
+/** 以下开始是将Android Library上传到jcenter的相关配置**/
+apply plugin: 'com.novoda.bintray-release'//添加
+//项目主页
+def siteUrl = 'https://github.com/wmzPangmao/MyFrame'
+publish{
+    repoName = 'MyModel'//远程仓库名字,不指明，默认是上传到maven
+    userOrg = 'wmzpangmao'//bintray.com的用户名
+    groupId = 'com.pangmao'//jcenter上的路径
+    artifactId = 'MyFrame'//项目名称
+    publishVersion = '1.0.0'//版本号
+    desc = '自定义Android框架'//描述，不重要
+    website = siteUrl//项目主页
+}
+tasks.withType(Javadoc) {//防止编码问题
+    options.addStringOption('Xdoclint:none', '-quiet')
+    options.addStringOption('encoding', 'UTF-8')
+    options.addStringOption('charSet', 'UTF-8')
+}

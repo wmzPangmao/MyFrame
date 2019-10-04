@@ -45,9 +45,5 @@ publish{
     publishVersion = '1.0.0'//版本号
     desc = '自定义Android框架'//描述，不重要
     website = siteUrl//项目主页
-}
-tasks.withType(Javadoc) {//防止编码问题
-    options.addStringOption('Xdoclint:none', '-quiet')
-    options.addStringOption('encoding', 'UTF-8')
-    options.addStringOption('charSet', 'UTF-8')
+//    licences = ['Apache-2.0']
 }

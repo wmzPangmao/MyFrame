@@ -14,7 +14,7 @@ buildscript {
         //bintray 插件
 //        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7.1'
 //        classpath 'com.github.dcendents:android-maven-gradle-plugin:2.0'
-        //使用jcenter
+        //简单bintray 插件
         classpath 'com.novoda:bintray-release:0.9.1'
     }
 }
@@ -23,6 +23,13 @@ allprojects {
     repositories {
         google()
         jcenter()
+    }
+
+    //防止编码问题
+    tasks.withType(Javadoc) {
+        options.addStringOption('Xdoclint:none', '-quiet')
+        options.addStringOption('encoding', 'UTF-8')
+        options.addStringOption('charSet', 'UTF-8')
     }
 }
 

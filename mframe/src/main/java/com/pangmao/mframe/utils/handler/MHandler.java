@@ -13,7 +13,8 @@ import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 
 /**
- * 模仿WeakHandler, 避免内存泄漏的Handler
+ * 模仿WeakHandler
+ * @author wangmingzhi
  */
 @SuppressWarnings("unused")
 public class MHandler {

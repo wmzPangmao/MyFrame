@@ -259,4 +259,18 @@ public class MAppUtils {
         return diff;
     }
 
+    //
+
+    /**
+     * 判断当前应用是否是debug状态
+     * @return ture为debug
+     */
+    public static boolean isApkInDebug() {
+        try {
+            ApplicationInfo info = context.getApplicationInfo();
+            return (info.flags & ApplicationInfo.FLAG_DEBUGGABLE) != 0;
+        } catch (Exception e) {
+            return false;
+        }
+    }
 }

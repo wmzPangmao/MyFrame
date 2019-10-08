@@ -1,6 +1,13 @@
 package com.pangmao.mframe.utils;
 
+import android.util.Base64;
+
+import java.io.ByteArrayOutputStream;
+import java.security.Key;
+import java.security.KeyFactory;
 import java.security.MessageDigest;
+import java.security.spec.PKCS8EncodedKeySpec;
+import java.security.spec.X509EncodedKeySpec;
 
 import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
@@ -95,25 +102,86 @@ public class MEncryptUtils {
     }
 
     /**
+     * RSA最大解密密文大小
+     * RSA最大加密明文大小
+     * 加密算法RSA
+     */
+    private static final int MAX_DECRYPT_BLOCK = 128;
+    private static final int MAX_ENCRYPT_BLOCK = 117;
+    private static final String KEY_ALGORITHM = "RSA";
+
+    /**
      * RSA加密
      *
-     * @param content 明文
+     * @param encryptedData 明文
      * @param pass  秘钥
      * @return 密文
      */
-    public static String encryptRSA(String content, String pass) throws Exception {
-        return "";
+    public static byte[] encryptRSA(byte[] encryptedData, String pass) throws Exception {
+
+        byte[] keyBytes = Base64.decode(pass, Base64.DEFAULT);
+        PKCS8EncodedKeySpec pkcs8KeySpec = new PKCS8EncodedKeySpec(keyBytes);
+        KeyFactory keyFactory = KeyFactory.getInstance(KEY_ALGORITHM);
+        Key privateK = keyFactory.generatePrivate(pkcs8KeySpec);
+//        Cipher cipher = Cipher.getInstance(keyFactory.getAlgorithm());
+        Cipher cipher = Cipher.getInstance("RSA/ECB/PKCS1Padding");
+        cipher.init(Cipher.DECRYPT_MODE, privateK);
+        int inputLen = encryptedData.length;
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        int offSet = 0;
+        byte[] cache;
+        int i = 0;
+        // 对数据分段解密
+        while (inputLen - offSet > 0) {
+            if (inputLen - offSet > MAX_DECRYPT_BLOCK) {
+                cache = cipher.doFinal(encryptedData, offSet, MAX_DECRYPT_BLOCK);
+            } else {
+                cache = cipher.doFinal(encryptedData, offSet, inputLen - offSet);
+            }
+            out.write(cache, 0, cache.length);
+            i++;
+            offSet = i * MAX_DECRYPT_BLOCK;
+        }
+        byte[] decryptedData = out.toByteArray();
+        out.close();
+        return decryptedData;
     }
 
     /**
      * RSA解密
      *
-     * @param content 密文
+     * @param decryptedData 密文
      * @param pass  秘钥
      * @return 明文
      */
-    public static String decryptRSA(String content, String pass) throws Exception {
-        return "";
+    public static byte[] decryptRSA(byte[] decryptedData, String pass) throws Exception {
+        byte[] keyBytes = Base64.decode(pass, Base64.DEFAULT);
+        X509EncodedKeySpec x509KeySpec = new X509EncodedKeySpec(keyBytes);
+        KeyFactory keyFactory = KeyFactory.getInstance(KEY_ALGORITHM);
+        Key publicK = keyFactory.generatePublic(x509KeySpec);
+        // 对数据加密
+//        Cipher cipher = Cipher.getInstance(keyFactory.getAlgorithm());
+        Cipher cipher = Cipher.getInstance("RSA/ECB/PKCS1Padding");
+        cipher.init(Cipher.ENCRYPT_MODE, publicK);
+        int inputLen = decryptedData.length;
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        int offSet = 0;
+        byte[] cache;
+        int i = 0;
+        // 对数据分段加密
+        while (inputLen - offSet > 0) {
+            if (inputLen - offSet > MAX_ENCRYPT_BLOCK) {
+                cache = cipher.doFinal(decryptedData, offSet, MAX_ENCRYPT_BLOCK);
+            } else {
+                cache = cipher.doFinal(decryptedData, offSet, inputLen - offSet);
+            }
+            out.write(cache, 0, cache.length);
+            i++;
+            offSet = i * MAX_ENCRYPT_BLOCK;
+        }
+        byte[] encryptedData = out.toByteArray();
+        out.close();
+        return encryptedData;
     }
 
 

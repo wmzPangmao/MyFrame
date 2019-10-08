@@ -12,6 +12,9 @@ import static org.junit.Assert.*;
 public class ExampleUnitTest {
     @Test
     public void addition_isCorrect() {
-        assertEquals(4, 2 + 2);
+//        assertEquals(4, 2 + 2);
+        String str = "123456789123";
+        str = str.replace("123", "888");
+        System.out.println(str);
     }
 }

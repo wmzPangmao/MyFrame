@@ -42,7 +42,7 @@ publish{
     userOrg = 'wmzpangmao'//bintray.com的用户名
     groupId = 'com.pangmao'//jcenter上的路径
     artifactId = 'MyFrame'//项目名称
-    publishVersion = '1.0.0'//版本号
+    publishVersion = '1.0.1'//版本号
     desc = '自定义Android框架'//描述，不重要
     website = siteUrl//项目主页
 //    licences = ['Apache-2.0']

@@ -98,4 +98,13 @@ public class MLoadingDialog extends Dialog {
         loadingMessage.setTextColor(color);
         return this;
     }
+
+    public static void noCancelShow(Context context){
+        MLoadingDialog.with(context)
+                .setOrientation(MLoadingDialog.VERTICAL)
+                .setBackgroundColor(Color.parseColor("#aa000000"))
+                .setMessageColor(Color.WHITE)
+                .setCanceled(false)
+                .show();
+    }
 }

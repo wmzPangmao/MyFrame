@@ -173,11 +173,33 @@ public class MAppUtils {
         return packageInfo;
     }
     /**
+     * 获取App的名称
+     *
+     * @return 名称
+     */
+    public static String getAppName() {
+        PackageManager pm = context.getPackageManager();
+        //获取包信息
+        try {
+            PackageInfo packageInfo = pm.getPackageInfo(context.getPackageName(), 0);
+            //获取应用 信息
+            ApplicationInfo applicationInfo = packageInfo.applicationInfo;
+            //获取albelRes
+            int labelRes = applicationInfo.labelRes;
+            //返回App的名称
+            return context.getResources().getString(labelRes);
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+    /**
      * 获取版本名称
      * String
      * @return 当前应用的版本名称
      */
-    public static String getVersionName(Context context) {
+    public static String getVersionName() {
        return getPackageInfo().versionName;
     }
 
@@ -186,8 +208,8 @@ public class MAppUtils {
      * int
      * @return 当前应用的版本号
      */
-    public static int getVersionCode(Context context) {
-        return getPackageInfo().versionCode;
+    public static long getVersionCode() {
+        return getPackageInfo().getLongVersionCode();
     }
     /**
      * 获取应用签名

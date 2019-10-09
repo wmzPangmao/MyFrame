@@ -1,8 +1,6 @@
 package com.pangmao.mframe.utils.http;
 
 
-import com.pangmao.mframe.utils.handler.MHandler;
-
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.Map;
@@ -11,7 +9,7 @@ public class MHttp implements IHttpEngine {
 
     private static IHttpEngine httpEngine;
     private static MHttp mHttp;
-    public static MHandler handler = new MHandler();
+//    public static MHandler handler = new MHandler();
 
     public static void init(IHttpEngine engine){
         httpEngine=engine;

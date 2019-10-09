@@ -47,7 +47,7 @@ public class MStringUtils {
      * @param str 待判断字符串
      * @return int 0.是 1.否
      */
-    public int isNum(String str){
+    public static int isNum(String str){
         int ErrorFlag = 0;
         int i = 0;
         if (str.equals("")) {
@@ -63,12 +63,20 @@ public class MStringUtils {
         return ErrorFlag;
     }
 
+    public static boolean isLeagel(String str){
+        if(str != null && str.length() > 0) {
+            return true;
+        }else {
+            return false;
+        }
+    }
+
     /***
      * 检查str是否为汉字
      * @param str 待检查字符串
      * @return true-是汉字 false-非汉字
      */
-    public boolean isChineseChar(String str){
+    public static boolean isChineseChar(String str){
         boolean flag = false;
         Pattern p = Pattern.compile("[\u4e00-\u9fa5]");
         Matcher m = p.matcher(str);
@@ -86,7 +94,7 @@ public class MStringUtils {
      * @param direction 0:左填充 1:右填充
      * @return String
      */
-    public String fillStr(int desc, char ch, int len, int direction){
+    public static String fillStr(int desc, char ch, int len, int direction){
         String descval = String.valueOf(desc);
         if (len > descval.length()) {
             int s = len - descval.length();
@@ -100,10 +108,10 @@ public class MStringUtils {
         }
         return descval;
     }
-    public String fillStrLeft(int desc, char ch, int len){
+    public static String fillStrLeft(int desc, char ch, int len){
         return fillStr(desc, ch, len, 0);
     }
-    public String fillStrRight(int desc, char ch, int len){
+    public static String fillStrRight(int desc, char ch, int len){
         return fillStr(desc, ch, len, 1);
     }
     /***
@@ -113,7 +121,7 @@ public class MStringUtils {
      * @param mode 补充模式 0-前补 1-后补
      * @return String
      */
-    public String addZeroForNum(String str, int strLength, int mode){
+    public static String addZeroForNum(String str, int strLength, int mode){
         int strLen = str.length();
         StringBuffer sb = null;
         while (strLen < strLength) {

@@ -65,7 +65,7 @@ public class FileUtils {
         return builder.toString();
     }
 
-    public static boolean deal(String filePath){
+    public static boolean delFile(String filePath){
         boolean flag = false;
         try {
             File file = new File(filePath);
@@ -76,6 +76,18 @@ public class FileUtils {
             e.printStackTrace();
         }
         return flag;
+    }
+
+    public static boolean delFile(File file) {
+        if (file.isFile()) {
+            return file.delete();
+        } else {
+            String[] filenames = file.list();
+            for (String f : filenames) {
+                delFile(f);
+            }
+            return file.delete();
+        }
     }
 
     //生成目录
@@ -90,6 +102,8 @@ public class FileUtils {
             e.printStackTrace();
         }
     }
+
+
 
     // 生成文件
     private File makeFilePath(String filePath, String fileName) {

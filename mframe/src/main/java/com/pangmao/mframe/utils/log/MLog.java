@@ -1,5 +1,15 @@
 package com.pangmao.mframe.utils.log;
 
+import android.os.Environment;
+import android.util.Log;
+
+import com.pangmao.mframe.MFrame;
+import com.pangmao.mframe.pojo.DateDifference;
+import com.pangmao.mframe.utils.FileUtils;
+import com.pangmao.mframe.utils.MAppUtils;
+import com.pangmao.mframe.utils.MDateUtils;
+
+import java.io.File;
 import java.util.List;
 import java.util.Map;
 
@@ -63,4 +73,42 @@ public final class MLog {
         printer.list(list);
     }
 
+    /**
+     * 日志文件保存的路径
+     */
+    private static String path =
+            Environment.getExternalStorageDirectory().getAbsolutePath()+ "/mispos/fslog/";
+    private static String fileName = "jwLog";
+
+    public static void logger(String msg){
+        Log.d(MFrame.tag, msg);
+        if (!MAppUtils.isApkInDebug()){
+            String dataTime = MDateUtils.getCurrentDate("yyyy-MM-dd HH:mm:ss");
+            FileUtils.write(dataTime + " " + msg, path,
+                    fileName + MDateUtils.getCurrentDate("yyyyMMdd") + ".log");
+        }
+    }
+
+    public static void clearLog(){
+        File file = new File(path);
+        String pattern = "yyyy-MM-dd";
+        String nowDate = MDateUtils.getCurrentDate(pattern);
+        if (!file.exists()) {
+            return;
+        }
+
+        if (!file.isFile()) {
+            File[] files = file.listFiles();
+            for (File f : files) {
+                String name = f.getName();
+                DateDifference dateDifference = MDateUtils.getTwoDataDifference(MDateUtils.string2Date(name.substring(0, 10), pattern));
+                boolean flag = name.length() == 19 && fileName.equalsIgnoreCase(name.substring(10, 19))
+                        && dateDifference.getDay() >= 10;
+                if (flag) {
+                    logger("删除的文件:" + name);
+                    FileUtils.delFile(f);
+                }
+            }
+        }
+    }
 }

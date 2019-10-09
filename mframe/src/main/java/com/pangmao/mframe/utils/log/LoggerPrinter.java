@@ -1,12 +1,7 @@
 package com.pangmao.mframe.utils.log;
 
-import android.os.Environment;
 import android.text.TextUtils;
 import android.util.Log;
-
-import com.pangmao.mframe.utils.FileUtils;
-import com.pangmao.mframe.utils.MAppUtils;
-import com.pangmao.mframe.utils.MDateUtils;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -35,12 +30,7 @@ final class LoggerPrinter implements Printer {
      * log settings
      */
     private static final MLogConfig config = new MLogConfig();
-    /**
-     * 日志文件保存的路径
-     */
-    private static String path =
-            Environment.getExternalStorageDirectory().getAbsolutePath()+ "/mispos/fslog/";
-    private static String fileName = "jwLog";
+
     /**
      * 样式
      */
@@ -73,10 +63,6 @@ final class LoggerPrinter implements Printer {
     @Override
     public String getFormatLog() {
         return logStr.toString();
-    }
-
-    public void clearLogFile(){
-
     }
 
     @Override
@@ -265,11 +251,6 @@ final class LoggerPrinter implements Printer {
             default:
                 Log.d(TAG, chunk);
                 break;
-        }
-        if (!MAppUtils.isApkInDebug()){
-            String dataTime = MDateUtils.getCurrentDate("yyyy-MM-dd HH:mm:ss");
-            FileUtils.write(dataTime + " " + chunk, path,
-                    fileName + MDateUtils.getCurrentDate("yyyyMMdd") + ".log");
         }
     }
 

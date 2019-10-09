@@ -8,6 +8,7 @@ import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.StateListDrawable;
 import android.util.AttributeSet;
 
+import com.pangmao.mframe.MFrame;
 import com.pangmao.mframe.R;
 
 import androidx.annotation.ColorInt;
@@ -161,8 +162,8 @@ public class MStateButton extends AppCompatTextView {
         mStateBackground.setExitFadeDuration(mDuration);
 
         //set background color
-        mNormalBackgroundColor = a.getColor(R.styleable.MStateButton_normalBackgroundColor, 0);
-        mPressedBackgroundColor = a.getColor(R.styleable.MStateButton_pressedBackgroundColor, 0);
+        mNormalBackgroundColor = a.getColor(R.styleable.MStateButton_normalBackgroundColor, MFrame.getColor(R.color.XFrame_blue));
+        mPressedBackgroundColor = a.getColor(R.styleable.MStateButton_pressedBackgroundColor, MFrame.getColor(R.color.XFrame_blue));
         mUnableBackgroundColor = a.getColor(R.styleable.MStateButton_unableBackgroundColor, 0);
         mNormalBackground.setColor(mNormalBackgroundColor);
         mPressedBackground.setColor(mPressedBackgroundColor);

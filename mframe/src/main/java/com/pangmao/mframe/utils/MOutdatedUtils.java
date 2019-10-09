@@ -18,9 +18,9 @@ import androidx.core.content.res.ResourcesCompat;
 /**
  * 此类主要是用来放一些系统过时方法的处理
  */
-public class XOutdatedUtils {
+public class MOutdatedUtils {
 
-    private XOutdatedUtils() {
+    private MOutdatedUtils() {
         throw new UnsupportedOperationException("u can't instantiate me...");
     }
 

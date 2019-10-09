@@ -23,6 +23,15 @@
         android:layout_gravity="center"
         android:text="@string/xloading_dialog_message"
         android:textColor="@color/XFrame_loading_dialog_message"
-        android:textSize="@dimen/XFrame_text_size_small" />
+        android:textSize="@dimen/XFrame_text_size" />
+
+    <TextView
+        android:id="@+id/xframe_loading_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text=""
+        android:textColor="#FF0000"
+        android:textSize="@dimen/XFrame_text_size" />
 
 </LinearLayout>

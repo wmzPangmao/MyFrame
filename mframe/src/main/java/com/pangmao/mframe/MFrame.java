@@ -1,7 +1,19 @@
 package com.pangmao.mframe;
 
 import android.content.Context;
+import android.content.res.AssetManager;
 import android.content.res.Resources;
+
+import com.pangmao.mframe.utils.MOutdatedUtils;
+import com.pangmao.mframe.utils.http.IHttpEngine;
+import com.pangmao.mframe.utils.http.MHttp;
+import com.pangmao.mframe.utils.log.MLog;
+import com.pangmao.mframe.utils.log.MLogConfig;
+import com.pangmao.mframe.widget.statusview.MStatusView;
+import com.pangmao.mframe.widget.statusview.MStatusViewConfig;
+
+import androidx.annotation.ColorRes;
+import androidx.annotation.StringRes;
 
 public class MFrame {
     private static Context context;
@@ -14,11 +26,39 @@ public class MFrame {
         MFrame.context = context;
     }
 
+    public static MLogConfig initXLog() {
+        return MLog.init();
+    }
+
+    public static void initXHttp(IHttpEngine httpEngine) {
+        MHttp.init(httpEngine);
+    }
+
+    public static MStatusViewConfig initXStatusView() {
+        return MStatusView.init();
+    }
+
     public static Context getContext() {
         return context;
     }
 
+    public static String getStrResources(@StringRes int id) {
+        return getResources().getString(id);
+    }
+
+    public static Resources.Theme getTheme() {
+        return MFrame.getContext().getTheme();
+    }
+
     public static Resources getResources() {
         return MFrame.getContext().getResources();
+    }
+
+    public static AssetManager getAssets() {
+        return MFrame.getContext().getAssets();
+    }
+
+    public static int getColor( @ColorRes int id) {
+        return MOutdatedUtils.getColor(id);
     }
 }

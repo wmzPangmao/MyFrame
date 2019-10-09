@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 import com.pangmao.mframe.R;
 import com.pangmao.mframe.utils.MEmptyUtils;
-import com.pangmao.mframe.utils.XOutdatedUtils;
+import com.pangmao.mframe.utils.MOutdatedUtils;
 
 import androidx.annotation.ColorInt;
 
@@ -24,6 +24,7 @@ public class MLoadingDialog extends Dialog {
     private static MLoadingDialog dialog;
     private Context context;
     private TextView loadingMessage;
+    private TextView loadingTime;
     private ProgressBar progressBar;
     private LinearLayout loadingView;
     private MColorDrawable drawable;
@@ -34,11 +35,12 @@ public class MLoadingDialog extends Dialog {
         drawable = new MColorDrawable();
         setContentView(R.layout.xloading_dialog);
         loadingMessage = (TextView) findViewById(R.id.xframe_loading_message);
+        loadingTime = findViewById(R.id.xframe_loading_time);
         progressBar = (ProgressBar) findViewById(R.id.xframe_loading_progressbar);
         loadingView = (LinearLayout) findViewById(R.id.xframe_loading_view);
         loadingMessage.setPadding(15, 0, 0, 0);
         drawable.setColor(Color.WHITE);
-        XOutdatedUtils.setBackground(loadingView, drawable);
+        MOutdatedUtils.setBackground(loadingView, drawable);
     }
 
     public static MLoadingDialog with(Context context) {
@@ -60,7 +62,7 @@ public class MLoadingDialog extends Dialog {
 
     public MLoadingDialog setBackgroundColor(@ColorInt int color) {
         drawable.setColor(color);
-        XOutdatedUtils.setBackground(loadingView, drawable);
+        MOutdatedUtils.setBackground(loadingView, drawable);
         return dialog;
     }
 
@@ -81,6 +83,13 @@ public class MLoadingDialog extends Dialog {
     public MLoadingDialog setMessage(String message) {
         if (!MEmptyUtils.isSpace(message)) {
             loadingMessage.setText(message);
+        }
+        return this;
+    }
+
+    public MLoadingDialog setLoadingTime(String strloadingTime) {
+        if (!MEmptyUtils.isSpace(strloadingTime)) {
+            loadingTime.setText(strloadingTime);
         }
         return this;
     }

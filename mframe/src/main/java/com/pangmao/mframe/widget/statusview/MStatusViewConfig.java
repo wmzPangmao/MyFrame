@@ -4,18 +4,19 @@ import com.pangmao.mframe.R;
 
 import androidx.annotation.LayoutRes;
 
-public class XStatusViewConfig {
+public class MStatusViewConfig {
 
     private int emptyViewResId = R.layout.xloading_empty_view;
-    private int errorViewResId = R.layout.xloading_error_view;
+    private int errorViewResId = R.layout.xloading_error2_view;
     private int loadingViewResId = R.layout.xloading_loading_view;
     private int noNetworkViewResId = R.layout.xloading_no_network_view;
+    private int successViewResId = R.layout.xloading_success_view;
 
     public int getEmptyViewResId() {
         return emptyViewResId;
     }
 
-    public XStatusViewConfig setEmptyViewResId(@LayoutRes int emptyViewResId) {
+    public MStatusViewConfig setEmptyViewResId(@LayoutRes int emptyViewResId) {
         this.emptyViewResId = emptyViewResId;
         return this;
     }
@@ -24,7 +25,7 @@ public class XStatusViewConfig {
         return errorViewResId;
     }
 
-    public XStatusViewConfig setErrorViewResId(@LayoutRes int errorViewResId) {
+    public MStatusViewConfig setErrorViewResId(@LayoutRes int errorViewResId) {
         this.errorViewResId = errorViewResId;
         return this;
     }
@@ -33,7 +34,7 @@ public class XStatusViewConfig {
         return loadingViewResId;
     }
 
-    public XStatusViewConfig setLoadingViewResId(@LayoutRes int loadingViewResId) {
+    public MStatusViewConfig setLoadingViewResId(@LayoutRes int loadingViewResId) {
         this.loadingViewResId = loadingViewResId;
         return this;
     }
@@ -42,8 +43,16 @@ public class XStatusViewConfig {
         return noNetworkViewResId;
     }
 
-    public XStatusViewConfig setNoNetworkViewResId(@LayoutRes int noNetworkViewResId) {
+    public MStatusViewConfig setNoNetworkViewResId(@LayoutRes int noNetworkViewResId) {
         this.noNetworkViewResId = noNetworkViewResId;
         return this;
+    }
+
+    public int getSuccessViewResId() {
+        return successViewResId;
+    }
+
+    public void setSuccessViewResId(int successViewResId) {
+        this.successViewResId = successViewResId;
     }
 }

@@ -9,8 +9,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import android.widget.TextView;
 
 import com.pangmao.mframe.R;
+import com.pangmao.mframe.utils.MStringUtils;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -24,17 +26,20 @@ public class MStatusView extends FrameLayout {
 
     private int mEmptyViewResId;
     private int mErrorViewResId;
+    private int mSuccessViewResId;
     private int mLoadingViewResId;
     private int mNoNetworkViewResId;
     private int mContentViewResId;
+
     private LayoutInflater mInflater;
     private OnClickListener mOnRetryClickListener;
+    private String showMsg;
     @SuppressLint("UseSparseArrays")
     private Map<Integer, View> mResId = new HashMap<>(10);
 
-    public static XStatusViewConfig config=new XStatusViewConfig();
+    public static MStatusViewConfig config=new MStatusViewConfig();
 
-    public static XStatusViewConfig init() {
+    public static MStatusViewConfig init() {
         return config;
     }
 
@@ -78,6 +83,7 @@ public class MStatusView extends FrameLayout {
         mErrorViewResId = a.getResourceId(R.styleable.XLoadingView_errorView, config.getErrorViewResId());
         mLoadingViewResId = a.getResourceId(R.styleable.XLoadingView_loadingView, config.getLoadingViewResId());
         mNoNetworkViewResId = a.getResourceId(R.styleable.XLoadingView_noNetworkView, config.getNoNetworkViewResId());
+        mSuccessViewResId = a.getResourceId(R.styleable.XLoadingView_successView, config.getSuccessViewResId());
         a.recycle();
     }
 
@@ -93,6 +99,8 @@ public class MStatusView extends FrameLayout {
     public final void showError() {
         show(mErrorViewResId);
     }
+
+    public final void showSuccess() {show(mSuccessViewResId);}
 
     public final void showLoading() {
         show(mLoadingViewResId);
@@ -122,12 +130,18 @@ public class MStatusView extends FrameLayout {
         addView(view);
         mResId.put(resId, view);
         if (resId == mErrorViewResId||resId == mNoNetworkViewResId) {
-            View v=view.findViewById(R.id.xloading_retry);
+            View v = view.findViewById(R.id.xloading_retry);
             if (mOnRetryClickListener != null) {
                 if (v != null) {
                     v.setOnClickListener(mOnRetryClickListener);
                 } else {
                     view.setOnClickListener(mOnRetryClickListener);
+                }
+            }
+            View tvMsg = view.findViewById(R.id.tv_xloading_msg);
+            if(MStringUtils.isLeagel(showMsg)) {
+                if(tvMsg != null) {
+                    ((TextView)tvMsg).setText(showMsg);
                 }
             }
         }
@@ -153,5 +167,13 @@ public class MStatusView extends FrameLayout {
      */
     public void setOnRetryClickListener(OnClickListener onRetryClickListener) {
         this.mOnRetryClickListener = onRetryClickListener;
+    }
+
+    /**
+     * 设置显示错误信息
+     * @param showMsg
+     */
+    public void setShowMsg(String showMsg) {
+        this.showMsg = showMsg;
     }
 }

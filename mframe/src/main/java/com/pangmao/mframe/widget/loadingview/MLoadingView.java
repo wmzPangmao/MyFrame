@@ -1,4 +1,4 @@
-package com.pangmao.mframe.widget.statusview;
+package com.pangmao.mframe.widget.loadingview;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -22,7 +22,7 @@ import androidx.fragment.app.Fragment;
 /**
  * 简单实用的页面状态统一管理 ，加载中、无网络、无数据、出错等状态的随意切换
  */
-public class MStatusView extends FrameLayout {
+public class MLoadingView extends FrameLayout {
 
     private int mEmptyViewResId;
     private int mErrorViewResId;
@@ -37,21 +37,21 @@ public class MStatusView extends FrameLayout {
     @SuppressLint("UseSparseArrays")
     private Map<Integer, View> mResId = new HashMap<>(10);
 
-    public static MStatusViewConfig config=new MStatusViewConfig();
+    public static MLoadingViewConfig config=new MLoadingViewConfig();
 
-    public static MStatusViewConfig init() {
+    public static MLoadingViewConfig init() {
         return config;
     }
 
-    public static MStatusView wrap(Activity activity) {
+    public static MLoadingView wrap(Activity activity) {
         return wrap(((ViewGroup) activity.findViewById(android.R.id.content)).getChildAt(0));
     }
 
-    public static MStatusView wrap(Fragment fragment) {
+    public static MLoadingView wrap(Fragment fragment) {
         return wrap(fragment.getView());
     }
 
-    public static MStatusView wrap(View view) {
+    public static MLoadingView wrap(View view) {
         if (view == null) {
             throw new RuntimeException("content view can not be null");
         }
@@ -60,22 +60,22 @@ public class MStatusView extends FrameLayout {
         int index = parent.indexOfChild(view);
         parent.removeView(view);
 
-        MStatusView MStatusView = new MStatusView(view.getContext());
-        parent.addView(MStatusView, index, lp);
-        MStatusView.addView(view);
-        MStatusView.setContentView(view);
-        return MStatusView;
+        MLoadingView MLoadingView = new MLoadingView(view.getContext());
+        parent.addView(MLoadingView, index, lp);
+        MLoadingView.addView(view);
+        MLoadingView.setContentView(view);
+        return MLoadingView;
     }
 
-    public MStatusView(Context context) {
+    public MLoadingView(Context context) {
         this(context, null);
     }
 
-    public MStatusView(Context context, AttributeSet attrs) {
+    public MLoadingView(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public MStatusView(Context context, AttributeSet attrs, int defStyleAttr) {
+    public MLoadingView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         mInflater = LayoutInflater.from(context);
         TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.XLoadingView, defStyleAttr, 0);

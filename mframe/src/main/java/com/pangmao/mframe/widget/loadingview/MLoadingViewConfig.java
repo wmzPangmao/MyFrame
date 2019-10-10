@@ -1,10 +1,10 @@
-package com.pangmao.mframe.widget.statusview;
+package com.pangmao.mframe.widget.loadingview;
 
 import com.pangmao.mframe.R;
 
 import androidx.annotation.LayoutRes;
 
-public class MStatusViewConfig {
+public class MLoadingViewConfig {
 
     private int emptyViewResId = R.layout.xloading_empty_view;
     private int errorViewResId = R.layout.xloading_error2_view;
@@ -16,7 +16,7 @@ public class MStatusViewConfig {
         return emptyViewResId;
     }
 
-    public MStatusViewConfig setEmptyViewResId(@LayoutRes int emptyViewResId) {
+    public MLoadingViewConfig setEmptyViewResId(@LayoutRes int emptyViewResId) {
         this.emptyViewResId = emptyViewResId;
         return this;
     }
@@ -25,7 +25,7 @@ public class MStatusViewConfig {
         return errorViewResId;
     }
 
-    public MStatusViewConfig setErrorViewResId(@LayoutRes int errorViewResId) {
+    public MLoadingViewConfig setErrorViewResId(@LayoutRes int errorViewResId) {
         this.errorViewResId = errorViewResId;
         return this;
     }
@@ -34,7 +34,7 @@ public class MStatusViewConfig {
         return loadingViewResId;
     }
 
-    public MStatusViewConfig setLoadingViewResId(@LayoutRes int loadingViewResId) {
+    public MLoadingViewConfig setLoadingViewResId(@LayoutRes int loadingViewResId) {
         this.loadingViewResId = loadingViewResId;
         return this;
     }
@@ -43,7 +43,7 @@ public class MStatusViewConfig {
         return noNetworkViewResId;
     }
 
-    public MStatusViewConfig setNoNetworkViewResId(@LayoutRes int noNetworkViewResId) {
+    public MLoadingViewConfig setNoNetworkViewResId(@LayoutRes int noNetworkViewResId) {
         this.noNetworkViewResId = noNetworkViewResId;
         return this;
     }

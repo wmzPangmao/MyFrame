@@ -9,8 +9,8 @@ import com.pangmao.mframe.utils.http.IHttpEngine;
 import com.pangmao.mframe.utils.http.MHttp;
 import com.pangmao.mframe.utils.log.MLog;
 import com.pangmao.mframe.utils.log.MLogConfig;
-import com.pangmao.mframe.widget.statusview.MStatusView;
-import com.pangmao.mframe.widget.statusview.MStatusViewConfig;
+import com.pangmao.mframe.widget.loadingview.MLoadingView;
+import com.pangmao.mframe.widget.loadingview.MLoadingViewConfig;
 
 import androidx.annotation.ColorRes;
 import androidx.annotation.StringRes;
@@ -34,8 +34,8 @@ public class MFrame {
         MHttp.init(httpEngine);
     }
 
-    public static MStatusViewConfig initXStatusView() {
-        return MStatusView.init();
+    public static MLoadingViewConfig initXStatusView() {
+        return MLoadingView.init();
     }
 
     public static Context getContext() {

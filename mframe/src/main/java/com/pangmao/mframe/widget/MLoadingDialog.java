@@ -99,11 +99,17 @@ public class MLoadingDialog extends Dialog {
         return this;
     }
 
-    public static void noCancelShow(Context context){
+    public void commonModeShow(Context context, int maxTime){
+        commonModeShow(context, loadingMessage.getText().toString(), maxTime);
+    }
+
+    public void commonModeShow(Context context, String message, int maxTime){
         MLoadingDialog.with(context)
                 .setOrientation(MLoadingDialog.VERTICAL)
                 .setBackgroundColor(Color.parseColor("#aa000000"))
+                .setMessage(message)
                 .setMessageColor(Color.WHITE)
+                .setLoadingTime(String.valueOf(maxTime))
                 .setCanceled(false)
                 .show();
     }

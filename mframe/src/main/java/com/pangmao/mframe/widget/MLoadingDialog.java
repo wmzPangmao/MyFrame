@@ -99,18 +99,20 @@ public class MLoadingDialog extends Dialog {
         return this;
     }
 
-    public void commonModeShow(Context context, int maxTime){
-        commonModeShow(context, loadingMessage.getText().toString(), maxTime);
+    public static void commonModeShow(Context context, int maxTime){
+        commonModeShow(context, null, maxTime);
     }
 
-    public void commonModeShow(Context context, String message, int maxTime){
-        MLoadingDialog.with(context)
-                .setOrientation(MLoadingDialog.VERTICAL)
+    public static void commonModeShow(Context context, String message, int maxTime){
+        MLoadingDialog.with(context);
+        dialog.setOrientation(MLoadingDialog.VERTICAL)
                 .setBackgroundColor(Color.parseColor("#aa000000"))
-                .setMessage(message)
                 .setMessageColor(Color.WHITE)
                 .setLoadingTime(String.valueOf(maxTime))
-                .setCanceled(false)
-                .show();
+                .setCanceled(false);
+        if(MEmptyUtils.isEmpty(message)) {
+            dialog.setMessage(message);
+        }
+        dialog.show();
     }
 }

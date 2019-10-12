@@ -129,7 +129,7 @@ public class MLoadingView extends FrameLayout {
         view.setVisibility(GONE);
         addView(view);
         mResId.put(resId, view);
-        if (resId == mErrorViewResId||resId == mNoNetworkViewResId) {
+//        if (resId == mErrorViewResId||resId == mNoNetworkViewResId) {
             View v = view.findViewById(R.id.xloading_retry);
             if (mOnRetryClickListener != null) {
                 if (v != null) {
@@ -144,7 +144,7 @@ public class MLoadingView extends FrameLayout {
                     ((TextView)tvMsg).setText(showMsg);
                 }
             }
-        }
+//        }
         return view;
     }
     @Override
@@ -162,13 +162,11 @@ public class MLoadingView extends FrameLayout {
     }
     /**
      * 设置重试点击事件
-     *
      * @param onRetryClickListener 重试点击事件
      */
     public void setOnRetryClickListener(OnClickListener onRetryClickListener) {
         this.mOnRetryClickListener = onRetryClickListener;
     }
-
     /**
      * 设置显示错误信息
      * @param showMsg

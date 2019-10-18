@@ -141,6 +141,16 @@ public class MDateUtils {
         return format.format(date);
     }
 
+    public static String getNowYear(){
+        return format(new Date(), "yyyy");
+    }
+
+    public static String getnowMonthDay(){
+        return format(new Date(), "MMdd");
+    }
+
+
+
     /**
      * 将时间戳转为时间字符串
      * <p>格式为yyyy-MM-dd HH:mm:ss</p>

@@ -36,6 +36,7 @@ public class MLoadingView extends FrameLayout {
     private String showMsg;
     @SuppressLint("UseSparseArrays")
     private Map<Integer, View> mResId = new HashMap<>(10);
+    private boolean isChange = false;
 
     public static MLoadingViewConfig config=new MLoadingViewConfig();
 
@@ -122,13 +123,14 @@ public class MLoadingView extends FrameLayout {
     }
 
     private View layout(int resId) {
-        if (mResId.containsKey(resId)) {
+        if (mResId.containsKey(resId) && !isChange) {
             return mResId.get(resId);
         }
         View view = mInflater.inflate(resId, this, false);
         view.setVisibility(GONE);
         addView(view);
         mResId.put(resId, view);
+        isChange = false;
 //        if (resId == mErrorViewResId||resId == mNoNetworkViewResId) {
             View v = view.findViewById(R.id.xloading_retry);
             if (mOnRetryClickListener != null) {
@@ -166,6 +168,7 @@ public class MLoadingView extends FrameLayout {
      */
     public void setOnRetryClickListener(OnClickListener onRetryClickListener) {
         this.mOnRetryClickListener = onRetryClickListener;
+        isChange = true;
     }
     /**
      * 设置显示错误信息
@@ -173,5 +176,6 @@ public class MLoadingView extends FrameLayout {
      */
     public void setShowMsg(String showMsg) {
         this.showMsg = showMsg;
+        isChange = true;
     }
 }

@@ -1,5 +1,7 @@
 package com.pangmao.mframe.utils;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -139,5 +141,31 @@ public class MStringUtils {
             strLen = str.length();
         }
         return str;
+    }
+    public static String addZeroFroNumLeft(String str, int strLength){
+        return addZeroForNum(str, strLength, 0);
+    }
+    public static String addZeroFroNumRight(String str, int strLength){
+        return addZeroForNum(str, strLength, 1);
+    }
+
+    public static List<String> splitStr(String resource, String split){
+        List<String> list = new ArrayList<>(10);
+        String str2 = resource;
+        int end = 0;
+        while (true){
+            end = str2.indexOf(split);
+            if(end < 0) {
+                break;
+            }else if(end == 0) {
+                str2 = str2.substring(end+1);
+                list.add("");
+            }else {
+                String str3 = str2.substring(0 , end);
+                list.add(str3);
+                str2 = str2.substring(end+1);
+            }
+        }
+        return list;
     }
 }

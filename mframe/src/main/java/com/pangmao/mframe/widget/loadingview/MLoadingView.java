@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.text.method.ScrollingMovementMethod;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -144,6 +145,7 @@ public class MLoadingView extends FrameLayout {
             if(MStringUtils.isLeagel(showMsg)) {
                 if(tvMsg != null) {
                     ((TextView)tvMsg).setText(showMsg);
+                    ((TextView)tvMsg).setMovementMethod(ScrollingMovementMethod.getInstance());
                 }
             }
 //        }

@@ -44,7 +44,12 @@ public class MRegexUtils {
      * @return 星号替换的身份证号
      */
     public static String idHide(String id) {
-        return id.replaceAll("(\\d{4})\\d{10}(\\d{4})", "$1** **** ****$2");
+        if(id.length() == 18) {
+            return id.replaceAll("(\\d{4})\\d{10}(\\d{3}[0-9Xx])", "$1** **** ****$2");
+        }else if(id.length() == 15) {
+            return id.replaceAll("(\\d{4})\\d{7}(\\d{3}[0-9Xx])", "$1** **** ****$2");
+        }
+        return id;
     }
 
     /**
@@ -53,7 +58,6 @@ public class MRegexUtils {
      * @param username 用户名
      * @return 是否为用户名
      */
-
     public static boolean checkUserName(String username) {
         Pattern pattern = Pattern.compile("^\\w+$");
         return pattern.matcher(username).find();

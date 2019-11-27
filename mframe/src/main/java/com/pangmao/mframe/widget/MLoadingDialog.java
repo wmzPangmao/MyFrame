@@ -110,9 +110,15 @@ public class MLoadingDialog extends Dialog {
                 .setMessageColor(Color.WHITE)
                 .setLoadingTime(String.valueOf(maxTime))
                 .setCanceled(false);
-        if(MEmptyUtils.isEmpty(message)) {
+        if(!MEmptyUtils.isEmpty(message)) {
             dialog.setMessage(message);
         }
         dialog.show();
+    }
+
+    public static void closeMyProgressDialog(){
+        if(dialog != null && dialog.isShowing()) {
+            dialog.dismiss();
+        }
     }
 }

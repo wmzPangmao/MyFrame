@@ -4,7 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 
-public class FileUtils {
+public class MFileUtils {
 
     public static boolean write(String content, String path, String fileName) {
         try {
@@ -103,8 +103,6 @@ public class FileUtils {
         }
     }
 
-
-
     // 生成文件
     private File makeFilePath(String filePath, String fileName) {
         File file = null;
@@ -118,5 +116,17 @@ public class FileUtils {
             e.printStackTrace();
         }
         return file;
+    }
+
+    public static boolean isExists(String path){
+        try {
+            File file = new File(path);
+            if (!file.exists()) {
+                return false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return true;
     }
 }

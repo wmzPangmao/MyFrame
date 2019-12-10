@@ -5,7 +5,7 @@ import android.util.Log;
 
 import com.pangmao.mframe.MFrame;
 import com.pangmao.mframe.pojo.DateDifference;
-import com.pangmao.mframe.utils.FileUtils;
+import com.pangmao.mframe.utils.MFileUtils;
 import com.pangmao.mframe.utils.MAppUtils;
 import com.pangmao.mframe.utils.MDateUtils;
 
@@ -84,7 +84,7 @@ public final class MLog {
         Log.d(MFrame.tag, msg);
         if (!MAppUtils.isApkInDebug()){
             String dataTime = MDateUtils.getCurrentDate("yyyy-MM-dd HH:mm:ss");
-            FileUtils.write(dataTime + " " + msg, path,
+            MFileUtils.write(dataTime + " " + msg, path,
                     fileName + MDateUtils.getCurrentDate("yyyyMMdd") + ".log");
         }
     }
@@ -106,7 +106,7 @@ public final class MLog {
                         && dateDifference.getDay() >= 10;
                 if (flag) {
                     logger("删除的文件:" + name);
-                    FileUtils.delFile(f);
+                    MFileUtils.delFile(f);
                 }
             }
         }

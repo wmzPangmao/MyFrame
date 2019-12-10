@@ -8,6 +8,7 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.os.Build;
 
 import com.pangmao.mframe.MFrame;
 
@@ -209,7 +210,13 @@ public class MAppUtils {
      * @return 当前应用的版本号
      */
     public static long getVersionCode() {
-        return getPackageInfo().getLongVersionCode();
+        long version = 0;
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.P) {
+            version = getPackageInfo().versionCode;
+        } else {
+            version = getPackageInfo().getLongVersionCode();
+        }
+        return version;
     }
     /**
      * 获取应用签名

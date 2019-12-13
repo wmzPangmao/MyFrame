@@ -29,6 +29,7 @@ public class MLoadingView extends FrameLayout {
     private int mErrorViewResId;
     private int mSuccessViewResId;
     private int mInfoViewResId;
+    private int mImageViewResId;
     private int mLoadingViewResId;
     private int mNoNetworkViewResId;
     private int mContentViewResId;
@@ -88,6 +89,7 @@ public class MLoadingView extends FrameLayout {
         mNoNetworkViewResId = a.getResourceId(R.styleable.XLoadingView_noNetworkView, config.getNoNetworkViewResId());
         mSuccessViewResId = a.getResourceId(R.styleable.XLoadingView_successView, config.getSuccessViewResId());
         mInfoViewResId = a.getResourceId(R.styleable.XLoadingView_infoView, config.getInfoViewResId());
+        mImageViewResId = a.getResourceId(R.styleable.XLoadingView_imageView, config.getInfoViewResId());
         a.recycle();
     }
 
@@ -115,6 +117,8 @@ public class MLoadingView extends FrameLayout {
     }
 
     public final void showInfo(){ show(mInfoViewResId);}
+
+    public final void showIamge(){ show(mImageViewResId);}
 
     public final void showContent() {
         show(mContentViewResId);

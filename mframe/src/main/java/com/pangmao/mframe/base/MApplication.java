@@ -1,11 +1,11 @@
 package com.pangmao.mframe.base;
 
-import android.app.Application;
-
 import com.pangmao.mframe.MFrame;
 
+import org.litepal.LitePalApplication;
 
-public class MApplication extends Application {
+
+public class MApplication extends LitePalApplication {
     private static MApplication instance;
 
     @Override

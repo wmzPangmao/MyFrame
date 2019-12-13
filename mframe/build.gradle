@@ -32,6 +32,7 @@ dependencies {
     androidTestImplementation 'androidx.test:runner:1.1.0-alpha3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0-alpha3'
     implementation 'cn.hutool:hutool-all:4.5.1'
+    implementation 'org.litepal.android:core:2.0.0'
 }
 
 /** 以下开始是将Android Library上传到jcenter的相关配置**/

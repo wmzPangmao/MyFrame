@@ -7,6 +7,7 @@ import androidx.annotation.LayoutRes;
 public class MLoadingViewConfig {
 
     private int emptyViewResId = R.layout.xloading_empty_view;
+    private int infoViewResId = R.layout.xloading_info_view;
     private int errorViewResId = R.layout.xloading_error2_view;
     private int loadingViewResId = R.layout.xloading_loading_view;
     private int noNetworkViewResId = R.layout.xloading_no_network_view;
@@ -54,5 +55,13 @@ public class MLoadingViewConfig {
 
     public void setSuccessViewResId(int successViewResId) {
         this.successViewResId = successViewResId;
+    }
+
+    public int getInfoViewResId() {
+        return infoViewResId;
+    }
+
+    public void setInfoViewResId(int infoViewResId) {
+        this.infoViewResId = infoViewResId;
     }
 }

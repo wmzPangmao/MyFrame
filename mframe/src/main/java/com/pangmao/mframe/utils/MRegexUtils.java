@@ -34,7 +34,12 @@ public class MRegexUtils {
      * @return 星号替换的银行卡号
      */
     public static String cardIdHide(String cardId) {
-        return cardId.replaceAll("\\d{15}(\\d{3})", "**** **** **** **** $1");
+        if(cardId.length() == 19) {
+            return cardId.replaceAll("(\\d{4})\\d{11}(\\d{4})", "$1 **** $2");
+        }else if(cardId.length() == 16) {
+            return cardId.replaceAll("(\\d{4})\\d{8}(\\d{4})", "$1 **** $2");
+        }
+        return cardId;
     }
 
     /**

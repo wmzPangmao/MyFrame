@@ -2,9 +2,7 @@ package com.pangmao.mylibaraydemo;
 
 import android.app.Application;
 
-import com.pangmao.mframe.base.MApplication;
-
-public class MyApplication extends MApplication {
+public class MyApplication extends Application {
 
     @Override
     public void onCreate() {

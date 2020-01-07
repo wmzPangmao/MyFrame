@@ -116,6 +116,13 @@ public class MLoadingDialog extends Dialog {
         dialog.show();
     }
 
+    public static boolean isShowing2(){
+        if(dialog != null) {
+            return dialog.isShowing();
+        }
+        return false;
+    }
+
     public static void closeMyProgressDialog(){
         if(dialog != null && dialog.isShowing()) {
             dialog.dismiss();

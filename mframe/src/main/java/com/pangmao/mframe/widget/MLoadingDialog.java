@@ -21,7 +21,6 @@ import androidx.annotation.ColorInt;
 public class MLoadingDialog extends Dialog {
     public static final int HORIZONTAL = 0;
     public static final int VERTICAL = 1;
-    private static MLoadingDialog dialog;
     private Context context;
     private TextView loadingMessage;
     private TextView loadingTime;
@@ -43,13 +42,6 @@ public class MLoadingDialog extends Dialog {
         MOutdatedUtils.setBackground(loadingView, drawable);
     }
 
-    public static MLoadingDialog with(Context context) {
-        if (dialog == null) {
-            dialog = new MLoadingDialog(context);
-        }
-        return dialog;
-    }
-
     public MLoadingDialog setOrientation(int orientation) {
         loadingView.setOrientation(orientation);
         if (orientation == HORIZONTAL) {
@@ -57,27 +49,24 @@ public class MLoadingDialog extends Dialog {
         } else {
             loadingMessage.setPadding(0, 15, 0, 0);
         }
-        return dialog;
+        return this;
     }
 
     public MLoadingDialog setBackgroundColor(@ColorInt int color) {
         drawable.setColor(color);
         MOutdatedUtils.setBackground(loadingView, drawable);
-        return dialog;
+        return this;
     }
 
     @Override
     public void dismiss() {
         super.dismiss();
-        if (dialog != null) {
-            dialog = null;
-        }
     }
 
     public MLoadingDialog setCanceled(boolean cancel) {
         setCanceledOnTouchOutside(cancel);
         setCancelable(cancel);
-        return dialog;
+        return this;
     }
 
     public MLoadingDialog setMessage(String message) {
@@ -99,33 +88,23 @@ public class MLoadingDialog extends Dialog {
         return this;
     }
 
-    public static void commonModeShow(Context context, int maxTime){
-        commonModeShow(context, null, maxTime);
+    public void commonModeShow(int maxTime){
+        commonModeShow(null, maxTime);
     }
 
-    public static void commonModeShow(Context context, String message, int maxTime){
-        MLoadingDialog.with(context);
-        dialog.setOrientation(MLoadingDialog.VERTICAL)
+    public void commonModeShow(String message, int maxTime){
+        this.setOrientation(MLoadingDialog.VERTICAL)
                 .setBackgroundColor(Color.parseColor("#aa000000"))
                 .setMessageColor(Color.WHITE)
                 .setLoadingTime(String.valueOf(maxTime))
                 .setCanceled(false);
         if(!MEmptyUtils.isEmpty(message)) {
-            dialog.setMessage(message);
+            this.setMessage(message);
         }
-        dialog.show();
+        show();
     }
 
-    public static boolean isShowing2(){
-        if(dialog != null) {
-            return dialog.isShowing();
-        }
-        return false;
-    }
-
-    public static void closeMyProgressDialog(){
-        if(dialog != null && dialog.isShowing()) {
-            dialog.dismiss();
-        }
+    public void closeMyProgressDialog(){
+        dismiss();
     }
 }

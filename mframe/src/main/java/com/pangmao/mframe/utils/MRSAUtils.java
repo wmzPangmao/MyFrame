@@ -1,5 +1,7 @@
 package com.pangmao.mframe.utils;
 
+import android.util.Base64;
+
 import java.io.ByteArrayOutputStream;
 import java.security.Key;
 import java.security.KeyFactory;
@@ -12,14 +14,13 @@ import java.security.interfaces.RSAPrivateKey;
 import java.security.interfaces.RSAPublicKey;
 import java.security.spec.PKCS8EncodedKeySpec;
 import java.security.spec.X509EncodedKeySpec;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import javax.crypto.Cipher;
-
-import cn.hutool.core.codec.Base64;
 
 /**
  * <p>
@@ -112,14 +113,14 @@ public class MRSAUtils {
      * @throws Exception
      */
     public static String sign(byte[] data, String privateKey) throws Exception {
-        byte[] keyBytes = Base64.decode(privateKey);
+        byte[] keyBytes = Base64.decode(privateKey, 0);
         PKCS8EncodedKeySpec pkcs8KeySpec = new PKCS8EncodedKeySpec(keyBytes);
         KeyFactory keyFactory = KeyFactory.getInstance(KEY_ALGORITHM);
         PrivateKey privateK = keyFactory.generatePrivate(pkcs8KeySpec);
         Signature signature = Signature.getInstance(SIGNATURE_ALGORITHM);
         signature.initSign(privateK);
         signature.update(data);
-        return Base64.encode(signature.sign());
+        return Arrays.toString(Base64.encode(signature.sign(), 0));
     }
 
     /**
@@ -137,14 +138,14 @@ public class MRSAUtils {
      */
     public static boolean verify(byte[] data, String publicKey, String sign)
             throws Exception {
-        byte[] keyBytes = Base64.decode(publicKey);
+        byte[] keyBytes = Base64.decode(publicKey, 0);
         X509EncodedKeySpec keySpec = new X509EncodedKeySpec(keyBytes);
         KeyFactory keyFactory = KeyFactory.getInstance(KEY_ALGORITHM);
         PublicKey publicK = keyFactory.generatePublic(keySpec);
         Signature signature = Signature.getInstance(SIGNATURE_ALGORITHM);
         signature.initVerify(publicK);
         signature.update(data);
-        return signature.verify(Base64.decode(sign));
+        return signature.verify(Base64.decode(sign, 0));
     }
 
     /**
@@ -159,7 +160,7 @@ public class MRSAUtils {
      */
     public static byte[] decryptByPrivateKey(byte[] encryptedData, String privateKey)
             throws Exception {
-        byte[] keyBytes = Base64.decode(privateKey);
+        byte[] keyBytes = Base64.decode(privateKey, 0);
         PKCS8EncodedKeySpec pkcs8KeySpec = new PKCS8EncodedKeySpec(keyBytes);
         KeyFactory keyFactory = KeyFactory.getInstance(KEY_ALGORITHM);
         Key privateK = keyFactory.generatePrivate(pkcs8KeySpec);
@@ -213,7 +214,7 @@ public class MRSAUtils {
      */
     public static byte[] decryptByPublicKey(byte[] encryptedData, String publicKey)
             throws Exception {
-        byte[] keyBytes = Base64.decode(publicKey);
+        byte[] keyBytes = Base64.decode(publicKey, 0);
         X509EncodedKeySpec x509KeySpec = new X509EncodedKeySpec(keyBytes);
         KeyFactory keyFactory = KeyFactory.getInstance(KEY_ALGORITHM);
         Key publicK = keyFactory.generatePublic(x509KeySpec);
@@ -252,7 +253,7 @@ public class MRSAUtils {
      */
     public static byte[] encryptByPublicKey(byte[] data, String publicKey)
             throws Exception {
-        byte[] keyBytes = Base64.decode(publicKey);
+        byte[] keyBytes = Base64.decode(publicKey, 0);
         X509EncodedKeySpec x509KeySpec = new X509EncodedKeySpec(keyBytes);
         KeyFactory keyFactory = KeyFactory.getInstance(KEY_ALGORITHM);
         Key publicK = keyFactory.generatePublic(x509KeySpec);
@@ -299,7 +300,7 @@ public class MRSAUtils {
      */
     public static byte[] encryptByPrivateKey(byte[] data, String privateKey)
             throws Exception {
-        byte[] keyBytes = Base64.decode(privateKey);
+        byte[] keyBytes = Base64.decode(privateKey, 0);
         PKCS8EncodedKeySpec pkcs8KeySpec = new PKCS8EncodedKeySpec(keyBytes);
         KeyFactory keyFactory = KeyFactory.getInstance(KEY_ALGORITHM);
         Key privateK = keyFactory.generatePrivate(pkcs8KeySpec);
@@ -338,7 +339,7 @@ public class MRSAUtils {
     public static String getPrivateKey(Map<String, Object> keyMap)
             throws Exception {
         Key key = (Key) keyMap.get(PRIVATE_KEY);
-        return Base64.encode(key.getEncoded());
+        return Arrays.toString(Base64.encode(key.getEncoded(), 0));
     }
 
     /**
@@ -353,7 +354,7 @@ public class MRSAUtils {
     public static String getPublicKey(Map<String, Object> keyMap)
             throws Exception {
         Key key = (Key) keyMap.get(PUBLIC_KEY);
-        return Base64.encode(key.getEncoded());
+        return Arrays.toString(Base64.encode(key.getEncoded(), 0));
     }
     
     public static void main(String[] args) {
@@ -374,7 +375,7 @@ public class MRSAUtils {
 "AOxpsf1duy/jTLTIEYXLE8a+b0e5DXUmd8FDMB9JOFL6yBVEsIrV6M1BZj/3dCYXwwzP5OQa4p7B"+
 "JIbgybgxCg==";
 		try {
-			String s2 = Base64.encode(encryptByPublicKey(s.getBytes(), pu));
+			String s2 = String.valueOf(Base64.encode(encryptByPublicKey(s.getBytes(), pu), 0));
 			s2 = replaceBlank(s2);
             System.out.println(""+s2);
 			MFileUtils.write("APP_ID=" + s2, "c:\\", "icbc.properties");
@@ -382,7 +383,7 @@ public class MRSAUtils {
 //			s2 = "XGJkyJWJVT4faVjGdV2v3qAif6smbXIIjE5+FmeVCUAU2akaL1umBKyO9o1AdmmCnYPqKPzr1xuHjy/CqqRLPbs/+o1ReuOKc7Px0M3H309qx5pmfJrUjr9NTr9HSJJscttC9r8H4hM3rkeNZPAIVcZ4isod1uozyt3UNTEHCFM=";
 //			String s2 = "WSMokUTjSuE5wmdY01n8zsMQGpdUgJKFAMAkWypQRSKRQEFkZIlVUTsLWKEOPK6CiemfJXKJV9Sgj8D2XDS73M4O1eru9a9meCh6ixETFuR0a2GWXDMm2wW2adgaYmrFLC6f6vEiFTOn8MBQCppgB7KRPJZIO1gNw+UDZbotcBM=";
 //            System.out.println(s2);
-			System.out.println(new String(decryptByPrivateKey(Base64.decode(s2), pr)));
+			System.out.println(new String(decryptByPrivateKey(Base64.decode(s2, 0), pr)));
 		} catch (Exception e) {
 			
 			e.printStackTrace();

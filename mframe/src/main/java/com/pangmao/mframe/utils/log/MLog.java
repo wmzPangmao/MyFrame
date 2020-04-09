@@ -5,7 +5,6 @@ import android.util.Log;
 
 import com.pangmao.mframe.MFrame;
 import com.pangmao.mframe.pojo.DateDifference;
-import com.pangmao.mframe.utils.MAppUtils;
 import com.pangmao.mframe.utils.MDateUtils;
 import com.pangmao.mframe.utils.MFileUtils;
 
@@ -82,7 +81,7 @@ public final class MLog {
 
     public static void logger(String msg){
         Log.d(MFrame.tag, msg);
-        if (!MAppUtils.isApkInDebug()){
+        if (MFrame.isWrite){
             String dataTime = MDateUtils.getCurrentDate("yyyy-MM-dd HH:mm:ss");
             MFileUtils.write(dataTime + ": " + msg, path,
                     fileName + MDateUtils.getCurrentDate("yyyyMMdd") + ".log");

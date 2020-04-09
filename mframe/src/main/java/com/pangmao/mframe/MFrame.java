@@ -20,7 +20,7 @@ public class MFrame {
 
     // #log
     public static String tag = "MFrame";
-    public static boolean isDebug = true;
+    public static boolean isWrite = false;
 
     public static void init(Context context) {
         MFrame.context = context;

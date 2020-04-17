@@ -9,7 +9,7 @@ import com.pangmao.mframe.MFrame;
 public class MLogConfig {
 
     private boolean showThreadInfo = true;
-    private boolean debug = MFrame.isDebug;
+    private boolean debug = MFrame.isWrite;
     private String tag = MFrame.tag;
 
 

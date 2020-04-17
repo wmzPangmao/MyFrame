@@ -14,7 +14,7 @@ public class MPrintUtils {
     }
 
     private static String tag = MFrame.tag;
-    private static boolean log = MFrame.isDebug;
+    private static boolean log = MFrame.isWrite;
 
     public static void setLog(boolean log) {
         MPrintUtils.log = log;

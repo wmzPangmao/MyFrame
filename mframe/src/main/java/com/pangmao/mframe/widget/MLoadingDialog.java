@@ -4,7 +4,7 @@ package com.pangmao.mframe.widget;
 import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Color;
-
+import android.util.TypedValue;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -73,6 +73,11 @@ public class MLoadingDialog extends Dialog {
         if (!MEmptyUtils.isSpace(message)) {
             loadingMessage.setText(message);
         }
+        return this;
+    }
+
+    public MLoadingDialog setMessageSize(float size){
+        loadingMessage.setTextSize(TypedValue.COMPLEX_UNIT_PX, size);
         return this;
     }
 
